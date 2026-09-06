@@ -13,7 +13,7 @@ const[email,setEmail]=useState('')
   const submitHandler =(e)=>{
     e.preventDefault()
     setUserData({
-      username:{
+      fullName:{
         firstName:firstName,
         lastName:lastName
       },
