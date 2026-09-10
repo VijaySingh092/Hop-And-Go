@@ -1,8 +1,47 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import logo from '../assets/hop-go-logo-png_seeklogo-67856-removebg-preview.png'
 import { Link } from 'react-router-dom'
+import CaptainDetails from '../components/CaptainDetails'
+import RidePopUp from '../components/RidePopUp'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import ConfirmRidePopUp from '../components/ConfirmRidePopUp'
+
 
 const CaptainHome = () => {
+
+  const [ridePopUpPanel,setRidePopUpPanel]=useState(true)
+  const [confirmRidePopUpPanel,setConfirmRidePopUpPanel]=useState(false)
+  
+  const ridePopUpPanelRef = useRef(null)
+  const confirmRidePopUpPanelRef = useRef(null)
+
+
+   useGSAP(function(){
+    if(ridePopUpPanel){
+      gsap.to(ridePopUpPanelRef.current,{
+      transform:'translateY(0)'
+    })
+    }else{
+      gsap.to(ridePopUpPanelRef.current,{
+      transform:'translateY(100%)'
+    })
+    }
+  },[ridePopUpPanel])
+
+  useGSAP(function(){
+    if(confirmRidePopUpPanel){
+      gsap.to(confirmRidePopUpPanelRef.current,{
+      transform:'translateY(0)'
+    })
+    }else{
+      gsap.to(confirmRidePopUpPanelRef.current,{
+      transform:'translateY(100%)'
+    })
+    }
+  },[confirmRidePopUpPanel])
+
+
   return (
       <div className='h-screen '>
         <div className='fixed p-6 top-0 flex items-center justify-between w-screen'>
@@ -15,34 +54,14 @@ const CaptainHome = () => {
         <img className='h-full w-full object-cover' src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif" alt="" />
       </div>
       <div className='h-2/5 p-6'>
-      <div className='flex items-center justify-between'>
-        <div className='flex items-center justify-start gap-3'>
-          <img className='h-10 w-10 rounded-full object-cover' src="https://img.magnific.com/free-photo/bearded-sailor-dressed-red-hat-yellow-anorak-posing-against-blue-wall-serious-man-with-beard-having-blue-charming-eyes_273609-8099.jpg?semt=ais_hybrid&w=740&q=80" alt="" />
-          <h4 className='text-lg font-medium'>Sachin Patel</h4>
-        </div>
-        <div>
-          <h4 className='text-xl font-semibold'>₹432.00</h4>
-          <p className='text-sm text-gray-500'>Earned</p>
-        </div>
+      <CaptainDetails/>
       </div>
-      <div className='flex p-3 mt-8 bg-gray-100 rounded-xl justify-center gap-5 items-start'>
-        <div className='text-center'>
-          <i className="text-3xl mb-2 font-thin ri-timer-2-line"></i>
-        <h5 className='text-lg font-medium'>10.2</h5>
-        <p className='text-sm text-gray-600'>Hours Online</p>
-        </div>
-        <div className='text-center'>
-          <i className="text-3xl mb-2 font-thin ri-speed-up-line"></i>
-        <h5 className='text-lg font-medium'>10.2</h5>
-         <p className='text-sm text-gray-600'>Hours Online</p>
-         </div>
-        <div className='text-center'>
-          <i className="text-3xl mb-2 font-thin ri-booklet-fill"></i>
-        <h5 className='text-lg font-medium'>10.2</h5>
-         <p className='text-sm text-gray-600'>Hours Online</p>
-         </div>
-      </div>
-      </div>
+      <div ref={ridePopUpPanelRef} className='fixed w-full z-10 translate-y-full bottom-0 px-3 py-6 pt-12 bg-white'>
+            <RidePopUp setRidePopUpPanel={setRidePopUpPanel} setConfirmRidePopUpPanel={setConfirmRidePopUpPanel}/>
+    </div>
+    <div ref={confirmRidePopUpPanelRef} className='fixed w-full h-screen z-10 translate-y-full bottom-0 px-3 py-6 pt-12 bg-white'>
+            <ConfirmRidePopUp setConfirmRidePopUpPanel={setConfirmRidePopUpPanel} setRidePopUpPanel={setRidePopUpPanel}/>
+    </div>
     </div>
   )
 }
