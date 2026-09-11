@@ -106,7 +106,7 @@ const Home = () => {
       <img className='w-16 left-5 top-5 absolute' src={logo} alt="" />
 
       <div className='h-screen w-screen'>
-        <img className='h-full w-full object-cover' src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif" alt="" />
+        <img className='h-full w-full object-cover' src="https://cdn.dribbble.com/userupload/23082108/file/original-87a87ecc74e2fb1bf9e7147cfcf9360f.gif" alt="" />
         </div>
         <div className=' flex flex-col justify-end h-screen absolute top-0 w-full'>
           <div className='h-[30%] bg-white p-6 relative'>
